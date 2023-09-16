@@ -1,0 +1,660 @@
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">google.load("jquery", "1.3.2");</script>
+
+<style type="text/css">
+  #bannerimage {
+    width: 100%;
+    background-image: url("./resources/images/dog1.png");
+    height: 300px;
+    background-color: rgb(255, 255, 255);
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+    body {
+        font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+        font-weight:300;
+        font-size:18px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 1100px;
+    }
+
+    h1, h2 {
+        font-weight:300;
+    }
+
+    .disclaimerbox {
+        background-color: #eee;
+        border: 1px solid #eeeeee;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+        padding: 20px;
+    }
+
+    video.header-vid {
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+    }
+
+    img.header-img {
+        height: 140px;
+        border: 1px solid black;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+    }
+
+    img.rounded {
+        border: 1px solid #eeeeee;
+        border-radius: 10px ;
+        -moz-border-radius: 10px ;
+        -webkit-border-radius: 10px ;
+    }
+
+    a:link,a:visited
+    {
+        color: #1367a7;
+        text-decoration: none;
+    }
+    a:hover {
+        color: #208799;
+    }
+
+    td.dl-link {
+        height: 160px;
+        text-align: center;
+        font-size: 22px;
+    }
+
+    .layered-paper-big { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+                0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+                5px 5px 0 0px #fff, /* The second layer */
+                5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+                10px 10px 0 0px #fff, /* The third layer */
+                10px 10px 1px 1px rgba(0,0,0,0.35), /* The third layer shadow */
+                15px 15px 0 0px #fff, /* The fourth layer */
+                15px 15px 1px 1px rgba(0,0,0,0.35), /* The fourth layer shadow */
+                20px 20px 0 0px #fff, /* The fifth layer */
+                20px 20px 1px 1px rgba(0,0,0,0.35), /* The fifth layer shadow */
+                25px 25px 0 0px #fff, /* The fifth layer */
+                25px 25px 1px 1px rgba(0,0,0,0.35); /* The fifth layer shadow */
+        margin-left: 10px;
+        margin-right: 45px;
+    }
+
+
+    .layered-paper { /* modified from: http://css-tricks.com/snippets/css/layered-paper/ */
+        box-shadow:
+                0px 0px 1px 1px rgba(0,0,0,0.35), /* The top layer shadow */
+                5px 5px 0 0px #fff, /* The second layer */
+                5px 5px 1px 1px rgba(0,0,0,0.35), /* The second layer shadow */
+                10px 10px 0 0px #fff, /* The third layer */
+                10px 10px 1px 1px rgba(0,0,0,0.35); /* The third layer shadow */
+        margin-top: 5px;
+        margin-left: 10px;
+        margin-right: 30px;
+        margin-bottom: 5px;
+    }
+
+    .vert-cent {
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    hr
+    {
+        border: 0;
+        height: 1.5px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+</style>
+
+<html>
+  <head>
+        <title>Hamilton-Jacobi Reachability Analysis for Hybrid Systems with Controlled and Forced Transitions</title>
+        <meta property="og:title" content="Factored 3D" />
+  </head>
+
+  <body>
+    <div id="bannerimage"></div>
+    <br>
+    <center>
+    <span style="font-size:42px">Hamilton-Jacobi Reachability Analysis for Hybrid Systems with Controlled and Forced Transitions</span>
+    </center>
+
+    <br><br>
+      <table align=center width=900px>
+       <tr>
+        <td align=center width=100px>
+        <center>
+        <span style="font-size:20px">Javier Borquez*</span>
+        </center>
+        </td>
+
+        <td align=center width=100px>
+        <center>
+        <span style="font-size:20px">Shuang Peng*</span>
+        </center>
+        </td>
+
+        <td align=center width=100px>
+        <center>
+        <span style="font-size:20px">Yiyu Chen*</span>
+        </center>
+        </td>
+
+        <td align=center width=100px>
+        <center>
+        <span style="font-size:20px">Quan Nguyen*</span>
+        </center>
+        </td>      
+           
+        <td align=center width=100px>
+        <center>
+        <span style="font-size:20px"><a href="https://smlbansal.github.io/">Somil Bansal*</a></span>
+        </center>
+        </td>
+
+
+     </tr>
+    </table>
+
+    <br>
+    <table align=center width=700px>
+       <tr>
+        <td align=center width=100px>
+        <center>
+        <span>*University of Southern California</span>
+        </center>
+        </td>	       
+      </tr>
+    </table>
+    <br>
+    <center>
+      <span style="font-size:20px">Presented at -------</span>
+      </center>
+    <br>
+       <!--  
+    <table align=center width=500px>
+      <tr>
+        <td align=center width=100px><center><span style="font-size:20px">
+              <a href="https://arxiv.org/pdf/2209.14976.pdf">[pdf]</a></span>
+            </center></td>
+
+            <td align=center width=100px><center><span style="font-size:20px">
+              <a href="./resources/bibtex.bib">[bibtex]</a></span>
+            </center></td>
+
+            <td align=center width=100px><center><span style="font-size:20px">
+              <a href="https://github.com/sia-lab-git/param_cond_reachability">[source code]</a></span>
+          </center></td>            
+      </tr>
+    </table>    
+       -->  
+    <br>
+  <!--  
+  <table align=center>
+              <tr>
+                  <td width=1000>
+                    <center>
+                      <iframe width="560" height="315" src="https://www.youtube.com/embed/odl88srx2iI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>                  </center>
+                  </td>
+              </tr>
+            </table>
+            -->
+          <hr>
+    <center><h1>Abstract</h1></center>
+
+            <p align='justify'>
+              Hybrid dynamical systems with non-linear dynamics are one of the most general modeling tools for representing robotic systems, especially contact-rich systems. 
+              However, providing guarantees regarding the safety or performance of such hybrid systems can still prove to be a challenging problem because it requires simultaneous reasoning about continuous state evolution and discrete mode switching. 
+              In this work, we address this problem by extending classical Hamilton-Jacobi (HJ) reachability analysis, a formal verification method for continuous non-linear dynamics in the presence of bounded inputs and disturbances, to hybrid dynamical systems. 
+              Our framework can compute reachable sets for hybrid systems consisting of multiple discrete modes, each with its own set of non-linear continuous dynamics, discrete transitions that can be directly commanded or forced by a discrete control input, while still accounting for control bounds and adversarial disturbances in the state evolution. 
+              Along with the reachable set, the proposed framework also provides an optimal continuous and discrete controller to ensure system safety.
+              We demonstrate our framework in simulation on an aircraft collision avoidance problem, as well as on a real-world testbed to solve the optimal mode planning problem for a quadruped with multiple gaits.
+            </p>
+<br>
+<br>
+<hr>
+        <center><h1>Problem Formulation</h1></center>
+        <head>
+          <title>Mathedemo</title>
+          <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+          </script>
+          <script type="text/javascript"
+            src="http://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+          </script>
+        </head>
+        
+        <p align='justify'>Consider a hybrid dynamical system with a finite set of discrete modes $Q = \{q_1, q_2, ..., q_N\}$, connected through controlled or forced switches. We also refer to $q_i$ as the discrete state of the system.
+        </p>          
+        <table align=center width=400px>
+            <tr>
+              <td width=640px>
+                <center>
+                    <a href="./resources/images/general_hyb.png"><img src ="./resources/images/general_hyb.png"></img></href></a><br> 
+                </center>
+              </td>
+            </tr>              
+        </table>
+
+
+        <p align='justify'>Let $x \in X \subset \mathbb{R}^{n_x}$ be the continuous state of the system, $ u \in U \subset \mathbb{R}^{n_u}$ be the continuous control input, and $d \in D \subset \mathbb{R}^{n_d}$ be the continuous disturbance in the system. In each discrete mode $q_i \in Q$, the continuous state evolves according to the following dynamics:
+        </p>
+
+        <p align='center'>$\dot{x} = f_i(x, u, d)$</p>
+
+
+
+        <p align='justify'></p>as long as $x \in S_i \subset X$, where $S_i$ is the valid operation domain for mode $q_i$. 
+
+        <p align='justify'>$q_i$ also has discrete control switches $\sigma_{ij}$ that allow controlled transition into another discrete mode $q_{j}$, where $j \in \{j_1,j_2, ...,j_n\} \subset \{1, 2, ..., N\}$. 
+        Note that the number of discrete modes the system can transition into (that is, $n$) may vary across different $q_i$.
+        As $x$ approaches ${S_i}^C$ (denoted $x \to {S_i}^C$), the system must take one of the forced control switches, $\varsigma_{ik}$.
+        This leads to a forced transition into another discrete modes $q_{k}$ 
+        where $k \in \{k_1,k_2,...,k_m\} \subset \{1, 2, ..., N\}$.
+        Each discrete transition from $q_i$ to $q_j$, whether controlled or forced, might lead to a state reset $x^+ = R_{ij}(x)$, where $x$ is the state before the transition, $x^+$ is the state after the transition.
+        </p>
+        <p align='justify'>Our key objective in this work is to compute the Backward Reachable Tube (BRT) of this hybrid dynamical system, defined as the set of initial discrete modes and continuous states $(x,q)$ of the system for which the agent acting optimally and under worst-case disturbances will eventually reach a target set $\mathcal{L}$ within the time horizon $[t, T]$. Mathematically, the BRT is defined as:</p>
+
+        <p align='center'>$\mathcal{V}(t)=\{(x_0, q_0): \forall d(\cdot), \exists u(\cdot), \sigma(\cdot), \varsigma(\cdot), \exists s \in [t, T], x(s) \in \mathcal{L}\}$
+        </p>
+
+        <p align='justify'>
+        where $x(s)$ denotes the (continuous) state of the system at time $s$, starting from state $x_0$ and discrete mode $q_0$ under continuous control profile $u(\cdot)$, discrete control switch profile $\sigma(\cdot)$, forced control switch profile $\varsigma(\cdot)$, and disturbance $d(\cdot)$.
+        Along with the BRT, we are interested in finding the optimal discrete and continuous control inputs that steer the system to the target set.
+        Conversely, if $\mathcal{L}$ represents the set of undesirable states for the system (such as obstacles for a navigation robot), we are interested in computing the BRT with the role of control and disturbance switched, i.e., finding the set of initial states from which getting into $\mathcal{L}$ is unavoidable, despite best control effort.
+        </p>
+
+        <hr>
+        <center><h1>Theorem I</h1></center>
+
+        <p align='justify'>
+        The core contribution of this work is Theorem I, an extension of the classical HJ reachability framework to hybrid dynamical systems with controlled and forced transitions, as well as state resets.
+        </p>
+        <p align='justify'>     
+        For a hybrid dynamical system, the value function $V(x, q_i, t)$ that captures the BRT for an implicit target function $l(x)$ is given by solving the following constrained VI:
+        </p>
+        <p align='justify'> 
+        If $x \in S_i$:
+        </p>
+        <p align='center'>  
+        \begin{multline}
+        \min\{l(x)-V(x, q_i, t), \min_{\sigma_{ij}}V(R_{ij}(x), q_{j}, t) - V(x, q_i, t), D_{t}V(x, q_i, t)+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d)\} = 0, 
+        \end{multline}
+        </p>
+        <p align='justify'> 
+        and if $x \in S_i^C$:
+        </p>
+        <p align='center'> 
+        \begin{equation} \label{eqn:froced_transition_valfunc}
+        V(x, q_i, t) =\min_{\varsigma_{ik}}V(R_{ik}(x), q_{k}, t)
+        \end{equation}
+        </p>
+        <p align='justify'>  
+        With terminal time condition:
+        </p>
+        <p align='center'>  
+        \begin{equation}
+        V(x, q_i, T) = l(x) 
+        \end{equation}
+        </p>
+
+        <br>
+ 
+
+        <center><h1>Proof</h1></center>
+
+        <p align='justify'>
+        We start with an analogous formulation to HJ reachability with a target function $l(x)$ such that the target set is defined as its sub-zero level set, $\mathcal{L} = \{(x) : l(x)\leq 0\}$. 
+        The BRT seeks to find all states that could enter $\mathcal{L}$ at any point within the time horizon. This is computed by finding the minimum distance to $\mathcal{L}$ over time.
+        </p>
+
+        <p align='justify'>
+        The value function is defined as the cost incurred under optimal discrete and continuous controls that minimizes distance to the target and optimal disturbances that maximizes it. 
+        We first consider the case when the state belongs to the interior of the domain $S_i$.
+        The value function is given as:
+        </p>
+
+
+        <p align='center'>
+        $V(x, q_i, t) = \max_{d \in D} \min_{u \in U} \min_{\sigma_{ij}}\min_{s \in[t, T]} l(x(s))$
+        </p>
+        <p align='justify'>
+        With terminal time condition given by:
+        </p>        
+        <p align='center'>
+        $V(x, q_i, T) = l(x)$
+        </p> 
+
+        <p align='justify'>
+        The optimal decision making for discrete transitions is pictorially shown in the figure below.
+        </p> 
+        
+        <table align=center width=600px>
+          <tr>
+            <td width=640px>
+              <center>
+                  <a href="./resources/images/proof_diag.png"><img src ="./resources/images/proof_diag.png"></img></href></a><br> 
+              </center>
+            </td>
+          </tr>              
+      </table>
+
+      <p align='justify'>
+      The discrete transitions are shown in green arrows and continuous control flow are indicated by purple trajectories.
+      We also add a ``dummy'' discrete transition, $\sigma_{ii}$, that keeps the system in the current discrete mode.
+      By definition,
+      the overall value function is given by the minimum cost across all these possible trajectories of the system.
+      From here, we consider two different cases:
+      </p>
+      <br>
+      <p align='justify'>
+      <b>Case 1</b>: If the system switches to a new discrete mode $j^*$, the continuous state immediately transitions to $R_{ij^*}$. 
+      In this case, the optimal cost incurred by the system from the new state $(R_{ij^*}(x), q_{j^*})$ is, by definition, given as $V(R_{ij^*}(x), q_{j^*}, t)$. 
+      Thus, the optimal cost across all possible discrete transitions is given as:
+      </p>
+      <br>
+      <p align='center'>
+      $V(x, q_i, t) =\min_{\sigma_{ij}}V(R_{ij}(x), q_{j}, t)$
+      </p>
+      <br>
+      <p align='justify'>
+      <b>Case 2</b>:: The system evolves in the same mode $q_i$, i.e., it takes the dummy switch $\sigma_{ii}$. 
+      In this case, for a small time step $\delta$ and using using the dynamic programming principle for the cost function, we have:
+      </p>
+      <br>
+      <p align='center'>
+      \begin{align} \label{eqn:cont_flow}
+      V(x, q_i, t) & = \max_{d \in D} \min_{u \in U} \min\{\min_{s \in[t, t+\delta]} l(x(s)), \nonumber
+      V\left(x(t+\delta), q_i, t+\delta\right)\} \nonumber\\
+      & \approx \max_{d \in D} \min_{u \in U} \min\{l(x(t)), V\left(x(t+\delta), q_i, t+\delta\right)\}
+      \end{align}
+      </p>
+      <br>
+      <p align='justify'> 
+      Approximating the value function at the next time step with a first order Taylor expansion:
+      </p>
+      <br>
+      <p align='center'>
+      \begin{align}
+      V\left(x(t+\delta), q_i, t+\delta\right) \approx & V(x, q_i, t) + \nonumber D_{t}V(x, q_i, t)\delta+\nabla V(x, q_i, t)\cdot\delta x,
+      \end{align}
+      </p>
+      <br>
+      <p align='justify'> 
+      where the change in the state $\delta x$ can be approximated as $f_i(x,u,d) \delta$. Ignoring the higher order terms and replacing the Taylor expansion in the value function:
+      </p>
+      <br>
+      <p align='center'>
+      \begin{multline}
+      V(x, q_i, t) = \min\{l(x(t)), V(x, q_i, t) + D_{t}V(x, q_i, t)\delta+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d) \delta \} 
+      \end{multline}
+      </p>
+      <br>
+      <p align='justify'> 
+      The optimal value function is given by the minimum across the two cases:
+      </p>
+      <br>
+      <p align='center'>
+      \begin{multline}
+      V(x, q_i, t) = \min\{l(x), V(x, q_i, t) + D_{t}V(x, q_i, t)\delta+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d) \delta , \min_{\sigma_{ij}}V(R_{ij}(x), q_{ij}, t)\} 
+      \end{multline}
+      </p>
+      <br>
+      <p align='justify'> 
+      Subtracting the value function $V(x, q_i, t)$ from both sides:
+      </p>
+      <br>
+      <p align='center'>
+      \begin{multline}
+      0 = \min\{l(x(t))-V(x, q_i, t),\delta (D_{t}V(x, q_i, t)+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d)) , \min_{\sigma_{ij}}V(R_{ij}(x), q_{ij}, t) - V(x, q_i, t) \} 
+      \end{multline}
+      </p>
+      <br>
+      <p align='justify'> 
+      Since the above hold for all $\delta>0$ we must have:
+      </p>
+      <br>
+      <p align='center'> 
+      \begin{multline}
+      0 = \min\{l(x(t))-V(x, q_i, t),D_{t}V(x, q_i, t)+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d) , \min_{\sigma_{ij}}V(R_{ij}(x), q_{j}, t) - V(x, q_i, t) \} 
+      \end{multline}
+      </p>
+      <br>
+      <p align='justify'> 
+      Note that here we have presented an informal proof based on the Taylor series expansion of
+      the value function; a more rigorous proof of HJI-VI for continuous evolution can be found in [1].
+      </p>
+      <p align='justify'> 
+      For states outside the domain of the discrete mode $q_i$ (i.e., $x \in S_i^C$), our discrete decision is over the set of available forced switches $\varsigma_{ik}$. For this case the proof is analogous to the Case 1 previously considered, but without the option to stay in $q_i$. The value function is then given by:   
+      </p>
+      <p align='center'> 
+      \begin{equation}
+      V(x, q_i, t) =\min_{\varsigma_{ik}}V(R_{ik}(x), q_{k}, t)
+      \end{equation}
+      </p>
+
+          <br>
+          <br>
+          <hr>
+          <p>
+            [1] J. Lygeros, “On reachability and minimum cost optimal control,” Automatica, vol. 40, no. 6, pp. 917–927, 2004.
+          </p>
+          <!--
+          <center><h1>Main Result</h1></center>          
+          <p align='justify'>To the system's dynamics, an additional state used to model the possible evolutions of the environment is added with zero dynamics. This new extended state can be used to evaluate the system's safety condition, assuming that we have a solution for the HJ reachability problem this extended system poses.       
+          </p>
+          <table align=center width=700px>
+            <tr>
+                <td width=640px>
+                  <center>
+                      <a href="./resources/images/main_idea.png"><img src ="./resources/images/main_idea.png"></img></href></a><br> 
+                </center>
+                </td>
+              </tr>
+              <tr>
+            <td width=640px>
+              <center>
+                  <span style="font-size:14px"><i> <span style="font-weight:bold">
+                  </span>
+</center>
+            </td>
+            </tr>
+        </table>
+        <p align='justify'>Then, existing reachability frameworks are used to solve this higher-dimensional reachability problem.
+
+          Typically such an approach would not be recommended as solving HJI-VI involves computing the value function over a grid representing a discretization of state space and time, which results in an exponential scaling complexity in computation and memory.
+          
+          To overcome this computational challenge, the <a href="https://arxiv.org/pdf/2011.02082.pdf">DeepReach</a> framework is leveraged as its deep learning-based approach is agnostic to grid resolution. The memory required generally scales with the underlying value function complexity, independent of the spatial resolution.
+        </p> -->
+          <br>
+          <hr>
+          <br>
+          <center><h1>Simulation Results</h1></center>
+        <!--
+        <br>
+        <br>
+        <center><h2>Air 3D</h2></center>        
+        <p align='justify'>We consider the two-vehicle collision avoidance problem where both agents move at the same constant speed and with input corresponding to their angular velocity. 
+
+          In this case, the input of the pursuer vehicle is modeled as the disturbance in the system. 
+          Moreover, the control input is the evader angular velocity, which is bounded to an interval parametrized by <var>&beta;<sub>U</sub></var> such that they can change online.
+          Intuitively, a larger <var>&beta;<sub>U</sub> corresponds to an evader with high maneuverability, whereas a smaller value corresponds to a diminished control authority.
+        </p>
+        <p align='justify'>
+          The BRT for this collision set corresponds to all states from which the pursuer can drive the system trajectory into collision despite optimal efforts of the evader to avoid a collision.
+          For example, we consider the situation where the evader moves with a nominal control authority trying to reach the green region while avoiding collision with the pursuer. 
+          Nominal operation of the system is interrupted due to an ''engine fail'' for the evader at <var>t<sub>0</sub></var> drastically limiting the evader control authority until it is repaired at time <var>t<sub>0</sub></var> at which the system returns to the nominal control authority.
+          We will compare the results over this scenario for a parameter conditioned controller and a regular nominal controller.
+        </p>
+
+        <p align='justify'>
+          
+        </p>
+  
+
+        <table align=center width=900px>
+          <tr>
+              <td width=640px>
+                <center>
+                    <a href="resources\images\air3d_p1d.gif"><img src ="resources\images\air3d_p1d.gif"></img></href></a><br> 
+              </center>
+              </td>
+            </tr>
+            <tr>
+          <td width=640px>
+            <center>
+              <p align='justify'> <b>(Top)</b> BRT slices in relative coordinates before, during, and after the engine failure. 
+                  The nominal model fails to consider the growth in the unsafe states (light blue region), ultimately leading to a collision. 
+                  <b>(Bottom left)</b> Trajectory in absolute coordinates for parameter conditioned controller, the collision was closely avoided.
+                  <b>(Bottom right)</b> Trajectory in absolute coordinates for nominal safety controller, leads to collision between the vehicles.
+              </p>
+          </td>
+          </tr>
+      </table>
+      <br>
+      <br>
+
+      <center><h2>Rocket Landing</h2></center>        
+      <p align='justify'>
+        This scenario mimics the situation where the rocket needs to land on an off-shore landing pad that might drift because of the ocean currents.
+                
+        The augmented system, in this case, is a 7D system (6 states and 1 parameter). We compute this 7D parameter-conditioned reachable set using DeepReach.
+        Note that computing such 7D reachable sets are generally infeasible for the traditional HJ reachability methods, which are <a href="https://ieeexplore.ieee.org/abstract/document/8263977?casa_token=pkstXyKt3IUAAAAA:jb82pOANWkmmWZ469tPD2a82xRYHEbK7bqEi1AfSF8cUa-HsFLb9RdxBZq2ibkgVukkw4Iw42w/">mostly limited to 6D systems</a>.
+                
+        
+      </p>
+      <p align='justify'>
+        To demonstrate the adaptability of the obtained value function, we consider two different cases: (i) a nominal safety controller that does not account for the dependency of the value function on the changing parameter; (ii) an adaptive safety controller that leverages parameter-conditioned value function to account for the movement of the target set by constantly sampling the parameter <var>&beta;<sub>L</sub></var> and activating the corresponding safety controller.
+        
+        The parameter-conditioned safety controller (the orange trajectory) constantly adjusts the horizontal thrust of the rocket with the shift in the position of the landing pad, ultimately enabling a successful landing. 
+        On the other hand, the nominal safety controller (the gray trajectory) fails to account for these movements and misses the landing pad.
+
+      </p>
+
+      <p align='justify'>
+        
+      </p>
+
+
+      <table align=center width=900px>
+        <tr>
+            <td width=640px>
+              <center>
+                  <a href="resources\images\rocket_comparison_crop.gif"><img src ="resources\images\rocket_comparison_crop.gif"></img></href></a><br> 
+            </center>
+            </td>
+          </tr>
+          <tr>
+        <td width=640px>
+          <center>
+            <p align='justify'> Animated trajectories for roket landing using: (Gray) a nominal safety controller; (Orange) an adaptive parameter-conditioned safety controller.
+        
+            </p>
+        </td>
+        </tr>
+    </table>
+  
+
+    <center><h2>Human Intertaction</h2></center>        
+      <p align='justify'>
+        This example considers a case where a robot and the human both aim to reach their respective goals while the robot tries to avoid collision with the human.
+        To achieve this the future human states are characterized by the set of states that can be occupied by the human over some time horizon T, defined as the Forward Reachable Tube (FRT).
+
+        In general, the FRT can be overly conservative so to restrict the possible future actions of the human and, consequently, the growth of the FRT a predictive model is considered.
+
+        Intuitively, when model confidence is high, we are certain that the human is moving directly towards its goal, leading to a much smaller FRT. On the other hand, when the model confidence is low, we are unsure about the human’s future actions.   
+      </p>
+      <p align='justify'>
+        As the human takes each action, the belief on intention of movement is considered as a online changing parameter.
+        The usefulness of this method is shown in the following example. Here the robot under nominal circumstances plans to take the gray trajectory, but there is an obstacle in the environment not modeled by the robot. When the human deviates from its optimal path to the goal (in order to avoid the obstacle), the robot model of the human cannot explain this motion, and the model confidence is dropped. This results in an update in the perceived human FRT, which can now be performed online due to its parameter-conditioned nature, adjusting the robot trajectory to swerve right to avoid any collision with the human or the obstacle.      </p>
+
+        <table align=center width=480px>
+          <tr>
+              <td width=240px>
+                <center>
+                  <a href="resources\images\human_robot_traj3.png"><img src ="resources\images\human_robot_traj3.png"></img></href></a><br>     
+              </center>
+              </td>
+            </tr>
+            <tr>
+          <td width=240px>
+            <center>
+              <p align='justify'> 
+                Trajectories for the human robot interaction whith a controller modeled as a confidence-parameterized FRT.
+              </p>
+          </td>
+          </tr>
+      </table>
+    
+
+
+    <center><h2>Three-Vehicle Collision Avoidance</h2></center>        
+    <p align='justify'>
+      To test the proposed method in high-dimensional scenarios, the following three-vehicle collision avoidance problem is considered: we have two evaders (<var>e<sub>1</sub></var> and <var>e<sub>2</sub></var>) and one pursuer (<var>p</var>), all three with 3D dynamics, leading to a 9D system in the joint state space of the evaders and the pursuer.
+      The pursuer here represents the adversarial agent that tries to steer evaders to collide either with the pursuer or with each other; evaders, on the other hand, try to avoid the collision.    
+      We consider a situation where the pursuer finds evaders of different sizes as it traverses its environment, which implies that the relative collision distance between each pair of vehicles might change online. 
+      This pairwise collision distance defines a parameter triplet which accounts for three additional ``virtual" states, resulting in a 12D system overall.   
+    </p>
+    <p align='justify'> 
+      The following figure illustrates slices of the obtained BRT for a particular position and orientation of the two evaders from the point of view of an incoming pursuer in the orientation shown by the gray plane in the bottom right of each slice. 
+      The shaded region represents the set of all starting positions of the pursuer for which a collision is unavoidable between at least one of the vehicle pairs. Different sizes for the BRTs on each slice show how the DNN can easily account for the parametrization of the value function by <var>&beta;<sub>L</sub></var>.
+    </p>
+
+    <p align='justify'>
+      
+    </p>
+
+
+    <table align=center width=900px>
+      <tr>
+          <td width=640px>
+            <center>
+              <a href="resources\images\multiveh_BRTv2.png"><img src ="resources\images\multiveh_BRTv2.png"></img></href></a><br>     
+          </center>
+          </td>
+        </tr>
+        <tr>
+      <td width=640px>
+        <center>
+          <p align='justify'> 
+            BRT slices for the position of the pursuer that results in a collision with either of the evaders, or force a collision between the evaders.
+          </p>
+      </td>
+      </tr>
+  </table>
+  -->
+
+      <hr>
+
+      <table align=center width=1100px>
+          <tr>
+              <td>
+                <left>
+          <center><h1>Acknowledgements</h1></center>
+          
+          <br>
+          <br>
+          This webpage template was borrowed from some <a href="https://richzhang.github.io/colorization/">colorful folks</a>.
+      </left>
+  </td>
+  </tr>
+  </table>
+
+  <br><br>
+</body>
+</html>

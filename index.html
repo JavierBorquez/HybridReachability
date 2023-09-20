@@ -246,9 +246,9 @@
 <br>
 <br>
 <hr>
-        <center><h1>Problem Formulation v3</h1></center>
+        <center><h1>Problem Formulation</h1></center>
         
-        <p align='justify'>Consider a hybrid dynamical system with a finite set of discrete modes \(Q = \{q_1, q_2, ..., q_N\}\), connected through controlled or forced switches. We also refer to $q_i$ as the discrete state of the system.
+        <p align='justify'>Consider a hybrid dynamical system with a finite set of discrete modes \(Q = \{q_1, q_2, ..., q_N\}\), connected through controlled or forced switches. We also refer to \(q_i\) as the discrete state of the system.
         </p>          
         <table align=center width=400px>
             <tr>
@@ -261,31 +261,31 @@
         </table>
 
 
-        <p align='justify'>Let $x \in X \subset \mathbb{R}^{n_x}$ be the continuous state of the system, $ u \in U \subset \mathbb{R}^{n_u}$ be the continuous control input, and $d \in D \subset \mathbb{R}^{n_d}$ be the continuous disturbance in the system. In each discrete mode $q_i \in Q$, the continuous state evolves according to the following dynamics:
+        <p align='justify'>Let \(x \in X \subset \mathbb{R}^{n_x}\) be the continuous state of the system, \( u \in U \subset \mathbb{R}^{n_u}\) be the continuous control input, and \(d \in D \subset \mathbb{R}^{n_d}\) be the continuous disturbance in the system. In each discrete mode \(q_i \in Q\), the continuous state evolves according to the following dynamics:
         </p>
 
-        <p align='center'>$\dot{x} = f_i(x, u, d)$</p>
+        <p align='center'>\(\dot{x} = f_i(x, u, d)\)</p>
 
 
 
-        <p align='justify'></p>as long as $x \in S_i \subset X$, where $S_i$ is the valid operation domain for mode $q_i$. 
+        <p align='justify'></p>as long as \(x \in S_i \subset X\), where \(S_i\) is the valid operation domain for mode \(q_i\). 
 
-        <p align='justify'>$q_i$ also has discrete control switches $\sigma_{ij}$ that allow controlled transition into another discrete mode $q_{j}$, where $j \in \{j_1,j_2, ...,j_n\} \subset \{1, 2, ..., N\}$. 
-        Note that the number of discrete modes the system can transition into (that is, $n$) may vary across different $q_i$.
-        As $x$ approaches ${S_i}^C$ (denoted $x \to {S_i}^C$), the system must take one of the forced control switches, $\varsigma_{ik}$.
-        This leads to a forced transition into another discrete modes $q_{k}$ 
-        where $k \in \{k_1,k_2,...,k_m\} \subset \{1, 2, ..., N\}$.
-        Each discrete transition from $q_i$ to $q_j$, whether controlled or forced, might lead to a state reset $x^+ = R_{ij}(x)$, where $x$ is the state before the transition, $x^+$ is the state after the transition.
+        <p align='justify'>\(q_i\) also has discrete control switches \(\sigma_{ij}\) that allow controlled transition into another discrete mode \(q_{j}\), where \(j \in \{j_1,j_2, ...,j_n\} \subset \{1, 2, ..., N\}\). 
+        Note that the number of discrete modes the system can transition into (that is, \(n\)) may vary across different \(q_i\).
+        As \(x\) approaches \({S_i}^C\) (denoted \(x \to {S_i}^C\)), the system must take one of the forced control switches, \(\varsigma_{ik}\).
+        This leads to a forced transition into another discrete modes \(q_{k}\) 
+        where \(k \in \{k_1,k_2,...,k_m\} \subset \{1, 2, ..., N\}\).
+        Each discrete transition from \(q_i\) to \(q_j\), whether controlled or forced, might lead to a state reset \(x^+ = R_{ij}(x)\), where \(x\) is the state before the transition, \(x^+\) is the state after the transition.
         </p>
-        <p align='justify'>Our key objective in this work is to compute the Backward Reachable Tube (BRT) of this hybrid dynamical system, defined as the set of initial discrete modes and continuous states $(x,q)$ of the system for which the agent acting optimally and under worst-case disturbances will eventually reach a target set $\mathcal{L}$ within the time horizon $[t, T]$. Mathematically, the BRT is defined as:</p>
+        <p align='justify'>Our key objective in this work is to compute the Backward Reachable Tube (BRT) of this hybrid dynamical system, defined as the set of initial discrete modes and continuous states \((x,q)\) of the system for which the agent acting optimally and under worst-case disturbances will eventually reach a target set \(\mathcal{L}\) within the time horizon \([t, T]\). Mathematically, the BRT is defined as:</p>
 
-        <p align='center'>$\mathcal{V}(t)=\{(x_0, q_0): \forall d(\cdot), \exists u(\cdot), \sigma(\cdot), \varsigma(\cdot), \exists s \in [t, T], x(s) \in \mathcal{L}\}$
+        <p align='center'>\(\mathcal{V}(t)=\{(x_0, q_0): \forall d(\cdot), \exists u(\cdot), \sigma(\cdot), \varsigma(\cdot), \exists s \in [t, T], x(s) \in \mathcal{L}\}\)
         </p>
 
         <p align='justify'>
-        where $x(s)$ denotes the (continuous) state of the system at time $s$, starting from state $x_0$ and discrete mode $q_0$ under continuous control profile $u(\cdot)$, discrete control switch profile $\sigma(\cdot)$, forced control switch profile $\varsigma(\cdot)$, and disturbance $d(\cdot)$.
+        where \(x(s)\) denotes the (continuous) state of the system at time \(s\), starting from state \(x_0\) and discrete mode \(q_0\) under continuous control profile \(u(\cdot)\), discrete control switch profile \(\sigma(\cdot)\), forced control switch profile \(\varsigma(\cdot)\), and disturbance \(d(\cdot)\).
         Along with the BRT, we are interested in finding the optimal discrete and continuous control inputs that steer the system to the target set.
-        Conversely, if $\mathcal{L}$ represents the set of undesirable states for the system (such as obstacles for a navigation robot), we are interested in computing the BRT with the role of control and disturbance switched, i.e., finding the set of initial states from which getting into $\mathcal{L}$ is unavoidable, despite best control effort.
+        Conversely, if \(\mathcal{L}\) represents the set of undesirable states for the system (such as obstacles for a navigation robot), we are interested in computing the BRT with the role of control and disturbance switched, i.e., finding the set of initial states from which getting into \(\mathcal{L}\) is unavoidable, despite best control effort.
         </p>
 
         <hr>
@@ -295,10 +295,10 @@
         The core contribution of this work is Theorem I, an extension of the classical HJ reachability framework to hybrid dynamical systems with controlled and forced transitions, as well as state resets.
         </p>
         <p align='justify'>     
-        For a hybrid dynamical system, the value function $V(x, q_i, t)$ that captures the BRT for an implicit target function $l(x)$ is given by solving the following constrained VI:
+        For a hybrid dynamical system, the value function \(V(x, q_i, t)\) that captures the BRT for an implicit target function \(l(x)\) is given by solving the following constrained VI:
         </p>
         <p align='justify'> 
-        If $x \in S_i$:
+        If \(x \in S_i\):
         </p>
         <p align='center'>  
         \begin{multline}
@@ -306,7 +306,7 @@
         \end{multline}
         </p>
         <p align='justify'> 
-        and if $x \in S_i^C$:
+        and if \(x \in S_i^C\):
         </p>
         <p align='center'> 
         \begin{equation} \label{eqn:froced_transition_valfunc}
@@ -328,25 +328,25 @@
         <center><h1>Proof</h1></center>
 
         <p align='justify'>
-        We start with an analogous formulation to HJ reachability with a target function $l(x)$ such that the target set is defined as its sub-zero level set, $\mathcal{L} = \{(x) : l(x)\leq 0\}$. 
-        The BRT seeks to find all states that could enter $\mathcal{L}$ at any point within the time horizon. This is computed by finding the minimum distance to $\mathcal{L}$ over time.
+        We start with an analogous formulation to HJ reachability with a target function \(l(x)\) such that the target set is defined as its sub-zero level set, \(\mathcal{L} = \{(x) : l(x)\leq 0\}\). 
+        The BRT seeks to find all states that could enter \(\mathcal{L}\) at any point within the time horizon. This is computed by finding the minimum distance to \(\mathcal{L}\) over time.
         </p>
 
         <p align='justify'>
         The value function is defined as the cost incurred under optimal discrete and continuous controls that minimizes distance to the target and optimal disturbances that maximizes it. 
-        We first consider the case when the state belongs to the interior of the domain $S_i$.
+        We first consider the case when the state belongs to the interior of the domain \(S_i\).
         The value function is given as:
         </p>
 
 
         <p align='center'>
-        $V(x, q_i, t) = \max_{d \in D} \min_{u \in U} \min_{\sigma_{ij}}\min_{s \in[t, T]} l(x(s))$
+        \(V(x, q_i, t) = \max_{d \in D} \min_{u \in U} \min_{\sigma_{ij}}\min_{s \in[t, T]} l(x(s))\)
         </p>
         <p align='justify'>
         With terminal time condition given by:
         </p>        
         <p align='center'>
-        $V(x, q_i, T) = l(x)$
+        \(V(x, q_i, T) = l(x)\)
         </p> 
 
         <p align='justify'>
@@ -365,25 +365,25 @@
 
       <p align='justify'>
       The discrete transitions are shown in green arrows and continuous control flow are indicated by purple trajectories.
-      We also add a ``dummy'' discrete transition, $\sigma_{ii}$, that keeps the system in the current discrete mode.
+      We also add a ``dummy'' discrete transition, \(\sigma_{ii}\), that keeps the system in the current discrete mode.
       By definition,
       the overall value function is given by the minimum cost across all these possible trajectories of the system.
       From here, we consider two different cases:
       </p>
       <br>
       <p align='justify'>
-      <b>Case 1</b>: If the system switches to a new discrete mode $j^*$, the continuous state immediately transitions to $R_{ij^*}$. 
-      In this case, the optimal cost incurred by the system from the new state $(R_{ij^*}(x), q_{j^*})$ is, by definition, given as $V(R_{ij^*}(x), q_{j^*}, t)$. 
+      <b>Case 1</b>: If the system switches to a new discrete mode \(j^*\), the continuous state immediately transitions to \(R_{ij^*}\). 
+      In this case, the optimal cost incurred by the system from the new state \((R_{ij^*}(x), q_{j^*})\) is, by definition, given as \(V(R_{ij^*}(x), q_{j^*}, t)\). 
       Thus, the optimal cost across all possible discrete transitions is given as:
       </p>
       <br>
       <p align='center'>
-      $V(x, q_i, t) =\min_{\sigma_{ij}}V(R_{ij}(x), q_{j}, t)$
+      \(V(x, q_i, t) =\min_{\sigma_{ij}}V(R_{ij}(x), q_{j}, t)\)
       </p>
       <br>
       <p align='justify'>
-      <b>Case 2</b>:: The system evolves in the same mode $q_i$, i.e., it takes the dummy switch $\sigma_{ii}$. 
-      In this case, for a small time step $\delta$ and using using the dynamic programming principle for the cost function, we have:
+      <b>Case 2</b>:: The system evolves in the same mode \(q_i\), i.e., it takes the dummy switch \(\sigma_{ii}\). 
+      In this case, for a small time step \(\delta\) and using using the dynamic programming principle for the cost function, we have:
       </p>
       <br>
       <p align='center'>
@@ -405,7 +405,7 @@
       </p>
       <br>
       <p align='justify'> 
-      where the change in the state $\delta x$ can be approximated as $f_i(x,u,d) \delta$. Ignoring the higher order terms and replacing the Taylor expansion in the value function:
+      where the change in the state \(\delta x\) can be approximated as \(f_i(x,u,d) \delta\). Ignoring the higher order terms and replacing the Taylor expansion in the value function:
       </p>
       <br>
       <p align='center'>
@@ -425,7 +425,7 @@
       </p>
       <br>
       <p align='justify'> 
-      Subtracting the value function $V(x, q_i, t)$ from both sides:
+      Subtracting the value function \(V(x, q_i, t)\) from both sides:
       </p>
       <br>
       <p align='center'>
@@ -435,7 +435,7 @@
       </p>
       <br>
       <p align='justify'> 
-      Since the above hold for all $\delta>0$ we must have:
+      Since the above hold for all \(\delta>0\) we must have:
       </p>
       <br>
       <p align='center'> 
@@ -449,7 +449,7 @@
       the value function; a more rigorous proof of HJI-VI for continuous evolution can be found in [1].
       </p>
       <p align='justify'> 
-      For states outside the domain of the discrete mode $q_i$ (i.e., $x \in S_i^C$), our discrete decision is over the set of available forced switches $\varsigma_{ik}$. For this case the proof is analogous to the Case 1 previously considered, but without the option to stay in $q_i$. The value function is then given by:   
+      For states outside the domain of the discrete mode \(q_i\) (i.e., \(x \in S_i^C\)), our discrete decision is over the set of available forced switches \(\varsigma_{ik}\). For this case the proof is analogous to the Case 1 previously considered, but without the option to stay in \(q_i\). The value function is then given by:   
       </p>
       <p align='center'> 
       \begin{equation}

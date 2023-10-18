@@ -460,195 +460,246 @@
           <br>
           <br>
           <hr>
-          <p>
-            [1] J. Lygeros, “On reachability and minimum cost optimal control,” Automatica, vol. 40, no. 6, pp. 917–927, 2004.
-          </p>
-          <!--
-          <center><h1>Main Result</h1></center>          
-          <p align='justify'>To the system's dynamics, an additional state used to model the possible evolutions of the environment is added with zero dynamics. This new extended state can be used to evaluate the system's safety condition, assuming that we have a solution for the HJ reachability problem this extended system poses.       
-          </p>
-          <table align=center width=700px>
-            <tr>
-                <td width=640px>
-                  <center>
-                      <a href="./resources/images/main_idea.png"><img src ="./resources/images/main_idea.png"></img></href></a><br> 
-                </center>
-                </td>
-              </tr>
-              <tr>
+
+        <center><h1>Simulation Results</h1></center>
+        <br>
+        <center><h2>Dog 1D</h2></center>        
+        <p align='justify'>To illustrate our approach, we consider very simplified, high-level dynamics for a robot
+           quadruped moving in one dimension in a room with an obstacle (table). The robot goal is to reach the marked area on the other side of the table.
+        </p>
+        <table align=center width=480px>
+          <tr>
             <td width=640px>
               <center>
-                  <span style="font-size:14px"><i> <span style="font-weight:bold">
-                  </span>
-</center>
+                  <a href="./resources/images/dog1.png"><img src ="./resources/images/dog1.png"></img></href></a><br> 
+              </center>
             </td>
-            </tr>
+          </tr>              
         </table>
-        <p align='justify'>Then, existing reachability frameworks are used to solve this higher-dimensional reachability problem.
-
-          Typically such an approach would not be recommended as solving HJI-VI involves computing the value function over a grid representing a discretization of state space and time, which results in an exponential scaling complexity in computation and memory.
-          
-          To overcome this computational challenge, the <a href="https://arxiv.org/pdf/2011.02082.pdf">DeepReach</a> framework is leveraged as its deep learning-based approach is agnostic to grid resolution. The memory required generally scales with the underlying value function complexity, independent of the spatial resolution.
-        </p> -->
-          <br>
-          <hr>
-          <br>
-          <center><h1>Simulation Results</h1></center>
-        <!--
-        <br>
-        <br>
-        <center><h2>Air 3D</h2></center>        
-        <p align='justify'>We consider the two-vehicle collision avoidance problem where both agents move at the same constant speed and with input corresponding to their angular velocity. 
-
-          In this case, the input of the pursuer vehicle is modeled as the disturbance in the system. 
-          Moreover, the control input is the evader angular velocity, which is bounded to an interval parametrized by <var>&beta;<sub>U</sub></var> such that they can change online.
-          Intuitively, a larger <var>&beta;<sub>U</sub> corresponds to an evader with high maneuverability, whereas a smaller value corresponds to a diminished control authority.
-        </p>
-        <p align='justify'>
-          The BRT for this collision set corresponds to all states from which the pursuer can drive the system trajectory into collision despite optimal efforts of the evader to avoid a collision.
-          For example, we consider the situation where the evader moves with a nominal control authority trying to reach the green region while avoiding collision with the pursuer. 
-          Nominal operation of the system is interrupted due to an ''engine fail'' for the evader at <var>t<sub>0</sub></var> drastically limiting the evader control authority until it is repaired at time <var>t<sub>0</sub></var> at which the system returns to the nominal control authority.
-          We will compare the results over this scenario for a parameter conditioned controller and a regular nominal controller.
-        </p>
 
         <p align='justify'>
-          
-        </p>
-  
+          The hybrid system representation of this system is shown in the following diagram.
+          Here, the continuous state \(x \in \mathbb{R}\) is the position of the robot and \(q_i\) with \(i \in \{1,2,3\}\) are the discrete modes of the system. 
+          \(u \in [0,1]\) is the continuous control of the system.
+          The target set is given as the set of positions \(9 \leq x \leq 10\).
 
-        <table align=center width=900px>
+          In this example, \(q_1\) represents a walking gait, \(q_3\) represents frozen dynamics when the walking 
+          robot comes in contact with the table obstacle, and \(q_2\) is a crawling gait that allows the robot 
+          to move under the table but at a slower rate compared to walking.
+        </p> 
+
+        <table align=center width=360px>
           <tr>
               <td width=640px>
                 <center>
-                    <a href="resources\images\air3d_p1d.gif"><img src ="resources\images\air3d_p1d.gif"></img></href></a><br> 
+                    <a href="resources\images\dog1_diagram.png"><img src ="resources\images\dog1_diagram.png"></img></href></a><br> 
               </center>
               </td>
             </tr>
-            <tr>
-          <td width=640px>
-            <center>
-              <p align='justify'> <b>(Top)</b> BRT slices in relative coordinates before, during, and after the engine failure. 
-                  The nominal model fails to consider the growth in the unsafe states (light blue region), ultimately leading to a collision. 
-                  <b>(Bottom left)</b> Trajectory in absolute coordinates for parameter conditioned controller, the collision was closely avoided.
-                  <b>(Bottom right)</b> Trajectory in absolute coordinates for nominal safety controller, leads to collision between the vehicles.
-              </p>
-          </td>
-          </tr>
-      </table>
-      <br>
-      <br>
+        </table>
 
-      <center><h2>Rocket Landing</h2></center>        
-      <p align='justify'>
-        This scenario mimics the situation where the rocket needs to land on an off-shore landing pad that might drift because of the ocean currents.
-                
-        The augmented system, in this case, is a 7D system (6 states and 1 parameter). We compute this 7D parameter-conditioned reachable set using DeepReach.
-        Note that computing such 7D reachable sets are generally infeasible for the traditional HJ reachability methods, which are <a href="https://ieeexplore.ieee.org/abstract/document/8263977?casa_token=pkstXyKt3IUAAAAA:jb82pOANWkmmWZ469tPD2a82xRYHEbK7bqEi1AfSF8cUa-HsFLb9RdxBZq2ibkgVukkw4Iw42w/">mostly limited to 6D systems</a>.
-                
-        
-      </p>
-      <p align='justify'>
-        To demonstrate the adaptability of the obtained value function, we consider two different cases: (i) a nominal safety controller that does not account for the dependency of the value function on the changing parameter; (ii) an adaptive safety controller that leverages parameter-conditioned value function to account for the movement of the target set by constantly sampling the parameter <var>&beta;<sub>L</sub></var> and activating the corresponding safety controller.
-        
-        The parameter-conditioned safety controller (the orange trajectory) constantly adjusts the horizontal thrust of the rocket with the shift in the position of the landing pad, ultimately enabling a successful landing. 
-        On the other hand, the nominal safety controller (the gray trajectory) fails to account for these movements and misses the landing pad.
+        <br>
 
-      </p>
-
-      <p align='justify'>
-        
-      </p>
-
-
-      <table align=center width=900px>
-        <tr>
-            <td width=640px>
-              <center>
-                  <a href="resources\images\rocket_comparison_crop.gif"><img src ="resources\images\rocket_comparison_crop.gif"></img></href></a><br> 
-            </center>
-            </td>
-          </tr>
-          <tr>
-        <td width=640px>
-          <center>
-            <p align='justify'> Animated trajectories for roket landing using: (Gray) a nominal safety controller; (Orange) an adaptive parameter-conditioned safety controller.
-        
-            </p>
-        </td>
-        </tr>
-    </table>
-  
-
-    <center><h2>Human Intertaction</h2></center>        
-      <p align='justify'>
-        This example considers a case where a robot and the human both aim to reach their respective goals while the robot tries to avoid collision with the human.
-        To achieve this the future human states are characterized by the set of states that can be occupied by the human over some time horizon T, defined as the Forward Reachable Tube (FRT).
-
-        In general, the FRT can be overly conservative so to restrict the possible future actions of the human and, consequently, the growth of the FRT a predictive model is considered.
-
-        Intuitively, when model confidence is high, we are certain that the human is moving directly towards its goal, leading to a much smaller FRT. On the other hand, when the model confidence is low, we are unsure about the human’s future actions.   
-      </p>
-      <p align='justify'>
-        As the human takes each action, the belief on intention of movement is considered as a online changing parameter.
-        The usefulness of this method is shown in the following example. Here the robot under nominal circumstances plans to take the gray trajectory, but there is an obstacle in the environment not modeled by the robot. When the human deviates from its optimal path to the goal (in order to avoid the obstacle), the robot model of the human cannot explain this motion, and the model confidence is dropped. This results in an update in the perceived human FRT, which can now be performed online due to its parameter-conditioned nature, adjusting the robot trajectory to swerve right to avoid any collision with the human or the obstacle.      </p>
+        <p align='justify'>
+          The BRT for this example corresponds to all the combinations of continuous states and discrete modes
+           \((x,q)\) from which the quadruped can reach the target set within a \(5\) second time horizon.
+           Computing it using the classical Hamilton-Jacobi formulation with no optimal discrete mode switches
+           gives the following results:
+        </p>
+        <br>
 
         <table align=center width=480px>
           <tr>
-              <td width=240px>
-                <center>
-                  <a href="resources\images\human_robot_traj3.png"><img src ="resources\images\human_robot_traj3.png"></img></href></a><br>     
+            <td width=640px>
+              <center>
+                  <a href="./resources/images/dog1_brt_bad.png"><img src ="./resources/images/dog1_brt_bad.png"></img></href></a><br> 
               </center>
-              </td>
-            </tr>
-            <tr>
-          <td width=240px>
-            <center>
-              <p align='justify'> 
-                Trajectories for the human robot interaction whith a controller modeled as a confidence-parameterized FRT.
-              </p>
-          </td>
+            </td>
+          </tr> 
+          <tr>
+            <td width=640px>
+              <center>
+                <p align='justify'>
+                  (Top) Value function for crawling gait mode. (Bottom) Value function for walking gait mode.
+                   Obstacle is shown in shaded red. Blue shade shows BRT as the subzero level of the value function.
+                   Green shade shows target set as the subzero level of \(l(x)\). 
+                </p>
+              </center>
+            </td>
+          </tr>             
+        </table>
+
+        <p align='justify'>
+          For the crawling gait it can be observed that the BRT (the blue shaded area) propagates through the
+          obstacle and the BRT includes \(x=4m\) because the system can move at \(1m/s\) reaching the boundary
+          of the target in exactly \(5s\).
+          For the walking wait, even though the system is allowed to move faster, the BRT stops at the boundary 
+          of the obstacle as the walking gait gets stuck, so only states that start from the right side of the
+          obstacle can reach the target set.
+        </p>
+        <p align="justify">
+          We now apply the proposed method to compute the BRT.
+          To implement Algorithm 1, we use a modified version of helperOC library and the level set toolbox[2], both of which are used to solve classical HJI-VI.
+          We use a grid of 301 points over the \(x\) dimension for each of the 3 discrete operation modes. The resulting BRTs are the following: 
+        </p>
+
+        <table align=center width=480px>
+          <tr>
+            <td width=640px>
+              <center>
+                  <a href="./resources/images/dog1_brt.png"><img src ="./resources/images/dog1_brt.png"></img></href></a><br> 
+              </center>
+            </td>
+          </tr> 
+          <tr>
+            <td width=640px>
+              <center>
+                <p align='justify'>
+                  Value functions for states starting in a walking gait for a \(3\) and \(5\) seconds time horizon. 
+                  Area within the obstacle is shown in shaded red. Blue shade shows BRT as the subzero level 
+                  of the value function. Green shade shows the target set as the subzero level of the implicit
+                  target function \(l(x)\). 
+                </p>
+              </center>
+            </td>
+          </tr>             
+        </table>
+        
+        <p align="justify">
+        The intuitive solution for the optimal decision-making in this scenario is to use the walking gait
+        everywhere except in the obstacle area. The fast walking gait allows the system to reach the target quicker,
+        while crawling allows to expand the reachable states beyond the obstacle.
+        The computed solution using our algorithm indeed aligns with this intuition.
+        For example, if we consider the top value function for the 3-second time horizon, we can observe that the limit 
+        of the BRT is \(7m\) away from the target set, which coincides with the intuitive solution of walking for \(1s\)
+        covering \(3m\), then crawling under the table for \(1s\) covering its \(1m\) width, to finally go back to
+        walking for \(1s\) covering other \(3m\).
+        The bottom value function shows the BRT corresponding to a \(5s\) time horizon. Compared to the previous
+        classical attempt, where the BRT stopped growing beyond the obstacle boundary, we can see how the proposed
+        algorithm can optimally leverage discrete transitions along with continuous control to reach the target 
+        set from a wider set of initial states. 
+        </p>
+        
+      
+      <center><h2>Two-Aircraft Conflict Resolution</h2></center>        
+      <p align='justify'>
+        We next consider the two-aircraft conflict resolution example.
+        Here, two aircraft flying at a fixed altitude are considered. 
+        Each aircraft controls its speed; we assume that the first aircraft is controllable, while the other
+        aircraft's speed is uncertain (within a known interval) and hence modeled as an adversarial disturbance
+        to ensure safety. 
+        Using relative coordinates, the continuous dynamics of the system are described by:        
+      </p>
+
+      <p align='center'> 
+        \begin{equation}
+        \dot{x}_r  =-u+d \cos \psi_r+\omega_u y_r \\
+        \dot{y}_r  =d \sin \psi_r-\omega_u x_r \\
+        \dot{\psi}_r  =\omega_d-\omega_u,
+        \end{equation}
+      </p>
+
+      <p align='justify'>
+      where state \([x_r,y_r,\varphi_r]^T\) is the relative \(xy\) position and heading between the aircraft.
+      \(u\) and \(d\) are the velocities of the two aircraft, and \(\omega_u\) and \(\omega_d\) are their turning rates.
+
+      The conflict resolution protocol consists of three different operation modes. 
+      The aircraft begin in mode \(q_1\) with a straight flight (\(\omega_u=\omega_d=0)\), keeping a costant relative
+      heading. 
+      In this mode, the aircraft are on a collision course.
+      At some time, the aircraft can begin the collision avoidance maneuver by taking the switch \(\sigma_{12}\),
+      transitioning the system into mode \(q_2\) and an instantaneous heading change of \(\pi/2\).
+      In mode \(q_2\), the aircraft undergo a circular flight path, where both aircraft use the same constant
+      turning rate (\(\omega_u=\omega_d=1)\). Once the aircraft undergo a heading change of \(\pi\) radians, the
+      aircraft are forced to switch to mode \(q_3\), making another instantaneous \(\pi/2\) turn and resuming 
+      their straight flight \((\omega_u=\omega_d=0\)). 
+      The two aircraft are now on a collision-free path.
+      To keep track of the transition time on configuration \(q_2\) we add an additional timer state \(z\).
+      The hybrid system representation of this system is shown in the following diagram:
+      </p>
+
+      <table align=center width=600px>
+        <tr>
+            <td width=640px>
+              <center>
+                  <a href="resources\images\air_diag.png"><img src ="resources\images\air_diag.png"></img></href></a><br> 
+            </center>
+            </td>
           </tr>
       </table>
-    
 
 
-    <center><h2>Three-Vehicle Collision Avoidance</h2></center>        
-    <p align='justify'>
-      To test the proposed method in high-dimensional scenarios, the following three-vehicle collision avoidance problem is considered: we have two evaders (<var>e<sub>1</sub></var> and <var>e<sub>2</sub></var>) and one pursuer (<var>p</var>), all three with 3D dynamics, leading to a 9D system in the joint state space of the evaders and the pursuer.
-      The pursuer here represents the adversarial agent that tries to steer evaders to collide either with the pursuer or with each other; evaders, on the other hand, try to avoid the collision.    
-      We consider a situation where the pursuer finds evaders of different sizes as it traverses its environment, which implies that the relative collision distance between each pair of vehicles might change online. 
-      This pairwise collision distance defines a parameter triplet which accounts for three additional ``virtual" states, resulting in a 12D system overall.   
-    </p>
-    <p align='justify'> 
-      The following figure illustrates slices of the obtained BRT for a particular position and orientation of the two evaders from the point of view of an incoming pursuer in the orientation shown by the gray plane in the bottom right of each slice. 
-      The shaded region represents the set of all starting positions of the pursuer for which a collision is unavoidable between at least one of the vehicle pairs. Different sizes for the BRTs on each slice show how the DNN can easily account for the parametrization of the value function by <var>&beta;<sub>L</sub></var>.
-    </p>
+      <p align='justify'>
+        For this system, we are interested in finding the set of all initial states in mode \(q_1\) from which
+        a collision cannot be averted between the two aircraft under the above protocol, despite the best 
+        control effort. 
+        Thus, the complement of the BRT will represent the safe states for the system.
+        For BRT calculations, we consider a circular collision target set of 5 units around the controlled aircraft.
+        This corresponds to the two aircraft being in close proximity of each other, also referred to as ``loss of separation''.
+        We use an initial relative heading of \(\varphi_r=2\pi/3\) and a time horizon of \(t=5s\).
+        For aircraft velocities we consider \(u \in [1.5,3]\) and \(d \in [2,4]\). The calculations are carried on 
+        a \([x_r,y_r,z]\) grid of \([201,201,101]\) points, \(\varphi_r\) has null dynamics in all operation modes and
+        is not considered in the grid.
 
-    <p align='justify'>
-      
-    </p>
+        Results for BRT starting from operation mode \(q_1\) are shown in the following figure. 
+        They can be interpreted as follows: if the relative coordinates of the aircraft belong to a state 
+        outside the BRT, the collision avoidance maneuver can be initiated while ensuring a collision can always 
+        be avoided as long as the optimal discrete and continuous control is applied.
+      </p>
 
-
-    <table align=center width=900px>
-      <tr>
+      <table align=center width=600px>
+        <tr>
           <td width=640px>
             <center>
-              <a href="resources\images\multiveh_BRTv2.png"><img src ="resources\images\multiveh_BRTv2.png"></img></href></a><br>     
-          </center>
+                <a href="./resources/images/air_brt.png"><img src ="./resources/images/air_brt.png"></img></href></a><br> 
+            </center>
           </td>
-        </tr>
+        </tr> 
         <tr>
-      <td width=640px>
-        <center>
-          <p align='justify'> 
-            BRT slices for the position of the pursuer that results in a collision with either of the evaders, or force a collision between the evaders.
-          </p>
-      </td>
-      </tr>
-  </table>
-  -->
+          <td width=640px>
+            <center>
+              <p align='justify'>
+                Backward reachable tube for two-aircraft conflict resolution starting from mode \(q_1\). 
+                (Left) BRT for fixed speed of aircraft. (Right) BRT for aircraft under optimal control 
+                and disturbance.
+              </p>
+            </center>
+          </td>
+        </tr>             
+      </table>
+
+
+      <p align='justify'>
+        The left BRT exactly replicates the results of the case presented in [3] where both
+        aircraft keep their speed constant at their maximum value \(u=3\) and \(d=4), where the inside of the BRT 
+        correspond to states where the adversarial airplane can place itself behind the controlled aircraft and 
+        use its higher velocity to force a collision. 
+        However, unlike [3], we do not use any hard-coded heuristics to account for the 
+        discrete transitions during the BRT computation.
+        Furthermore, the right BRT considers the scenario where, in addition to the control on the transition,
+        both aircraft control their velocities optimally to avoid/force a collision with the other aircraft.
+        The changes in the BRT are reflected in the shaded areas, where the growth in the BRT close to the 
+        target corresponds to cases where the adversarial aircraft slows down to align itself with the controlled
+        aircraft and then use its higher velocity to force a collision. The decrease in size near the tail 
+        corresponds to states where the blue airplane slows down to avoid a collision.
+      </p>
+
+
 
       <hr>
+      <p>
+        [1] J. Lygeros, “On reachability and minimum cost optimal control,” Automatica, vol. 40, no. 6, pp. 917–927, 2004.
+      </p>
+      <br>
+      <p>
+        [2] I. Mitchell, “A toolbox of level set methods,” http://www.cs.ubc.ca/mitchell/ToolboxLS/toolboxLS. pdf, Tech. Rep. TR-2004-09, 2004.
+      </p>
+      <br>
+      <p>
+        [3] I. Mitchell and C. J. Tomlin, “Level set methods for computation in hybrid systems,” in International workshop on hybrid systems: Computation and control. Springer, 2000, pp. 310–323.
+      </p>
+      <hr>
+      <br>
 
       <table align=center width=1100px>
           <tr>

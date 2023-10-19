@@ -365,7 +365,7 @@
 
       <p align='justify'>
       The discrete transitions are shown in green arrows and continuous control flow are indicated by purple trajectories.
-      We also add a ``dummy'' discrete transition, \(\sigma_{ii}\), that keeps the system in the current discrete mode.
+      We also add a ''dummy'' discrete transition, \(\sigma_{ii}\), that keeps the system in the current discrete mode.
       By definition,
       the overall value function is given by the minimum cost across all these possible trajectories of the system.
       From here, we consider two different cases:
@@ -382,8 +382,8 @@
       </p>
       <br>
       <p align='justify'>
-      <b>Case 2</b>:: The system evolves in the same mode \(q_i\), i.e., it takes the dummy switch \(\sigma_{ii}\). 
-      In this case, for a small time step \(\delta\) and using using the dynamic programming principle for the cost function, we have:
+      <b>Case 2</b>: The system evolves in the same mode \(q_i\), i.e., it takes the dummy switch \(\sigma_{ii}\). 
+      In this case, for a small time step \(\delta\) and using the dynamic programming principle for the cost function, we have:
       </p>
       <br>
       <p align='center'>
@@ -400,7 +400,7 @@
       <br>
       <p align='center'>
       \begin{align}
-      V\left(x(t+\delta), q_i, t+\delta\right) \approx & V(x, q_i, t) + \nonumber D_{t}V(x, q_i, t)\delta+\nabla V(x, q_i, t)\cdot\delta x,
+      V\left(x(t+\delta), q_i, t+\delta\right) \approx & V(x, q_i, t) + \nonumber D_{t}V(x, q_i, t)\delta+\nabla V(x, q_i, t)\cdot\delta x
       \end{align}
       </p>
       <br>
@@ -409,9 +409,9 @@
       </p>
       <br>
       <p align='center'>
-      \begin{multline}
+      \begin{align}
       V(x, q_i, t) = \min\{l(x(t)), V(x, q_i, t) + D_{t}V(x, q_i, t)\delta+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d) \delta \} 
-      \end{multline}
+      \end{align}
       </p>
       <br>
       <p align='justify'> 
@@ -419,9 +419,9 @@
       </p>
       <br>
       <p align='center'>
-      \begin{multline}
+      \begin{align}
       V(x, q_i, t) = \min\{l(x), V(x, q_i, t) + D_{t}V(x, q_i, t)\delta+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d) \delta , \min_{\sigma_{ij}}V(R_{ij}(x), q_{ij}, t)\} 
-      \end{multline}
+      \end{align}
       </p>
       <br>
       <p align='justify'> 
@@ -429,9 +429,9 @@
       </p>
       <br>
       <p align='center'>
-      \begin{multline}
+      \begin{align}
       0 = \min\{l(x(t))-V(x, q_i, t),\delta (D_{t}V(x, q_i, t)+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d)) , \min_{\sigma_{ij}}V(R_{ij}(x), q_{ij}, t) - V(x, q_i, t) \} 
-      \end{multline}
+      \end{align}
       </p>
       <br>
       <p align='justify'> 
@@ -439,9 +439,9 @@
       </p>
       <br>
       <p align='center'> 
-      \begin{multline}
+      \begin{align}
       0 = \min\{l(x(t))-V(x, q_i, t),D_{t}V(x, q_i, t)+ \max_{d \in D} \min_{u \in U} \nabla V(x, q_i, t)\cdot f_i(x,u,d) , \min_{\sigma_{ij}}V(R_{ij}(x), q_{j}, t) - V(x, q_i, t) \} 
-      \end{multline}
+      \end{align}
       </p>
       <br>
       <p align='justify'> 
@@ -635,7 +635,7 @@
         control effort. 
         Thus, the complement of the BRT will represent the safe states for the system.
         For BRT calculations, we consider a circular collision target set of 5 units around the controlled aircraft.
-        This corresponds to the two aircraft being in close proximity of each other, also referred to as ``loss of separation''.
+        This corresponds to the two aircraft being in close proximity of each other, also referred to as ''loss of separation''.
         We use an initial relative heading of \(\varphi_r=2\pi/3\) and a time horizon of \(t=5s\).
         For aircraft velocities we consider \(u \in [1.5,3]\) and \(d \in [2,4]\). The calculations are carried on 
         a \([x_r,y_r,z]\) grid of \([201,201,101]\) points, \(\varphi_r\) has null dynamics in all operation modes and

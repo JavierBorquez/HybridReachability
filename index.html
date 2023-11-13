@@ -684,7 +684,162 @@
         corresponds to states where the blue airplane slows down to avoid a collision.
       </p>
 
+      <br>
+      <hr>
+      <center><h1>Hardware Experiments</h1></center>
+      <br>
 
+      <p align='justify'>
+      We next apply our method for task-based, high-level mode planning on a real-world quadruped robot,
+      to reach a goal position in a terrain consisting of various obstacles. 
+      The quadruped has different walking modes, such as normal walking, walking on a slope, etc., 
+      each of which is modeled as a discrete mode in the hybrid system as shown in the following diagram:
+      </p>
+
+      <table align=center width=600px>
+        <tr>
+            <td width=640px>
+              <center>
+                  <a href="resources\images\quad_diag_1_s.png"><img src ="resources\images\quad_diag_1_s.png"></img></href></a><br> 
+            </center>
+            </td>
+          </tr>
+      </table>
+
+      <p align='justify'>
+        Within each discrete mode, we use simplified continuous dynamics to describe center-of-mass evolution:
+      </p>
+
+      <p align='center'> 
+        \begin{equation*}
+        \dot{x} =k_x V_{N} \sin \varphi + d_x; \quad 
+        \dot{y} =k_y V_{N} \cos \varphi + d_y; \quad
+        \dot{\varphi} =k_{\omega} \omega_{N},
+        \end{equation*}
+      </p>
+
+      <p align="justify">
+        where the state \([x,y,\varphi]^T\) represent the \(xy\) position and heading angle of the robot. 
+        \(V_{N} = 0.25m/s\) is the fixed (normalized) linear velocity and \(\omega_{N} \in [-0.5, 0.5] rad/s\) 
+        is the angular velocity control. 
+        \(k_x\), \(k_y\), and \(k_{\omega}\) are velocity gains for different operation modes. 
+        \(d_x\) and \(d_y\) are bounded disturbances on \(xy\) velocity. Also, we use discrete state \([z,\theta,\xi]^T\)
+        to set the body's height, pitch, and roll angle in different operation modes for overcoming various obstacles. 
+      </p>
+
+      <p align="justify">
+        Each operation mode matches a specific obstacle or terrain in the testing area. The quadruped begins in 
+        mode \(q_1\) for fast walking. If the robot reaches the boundary of the slope area, the system will be forced 
+        to switch to mode \(q_2\) with a \(20^{\circ}\) body pitch angle for slope climbing. At some time, the control 
+        may switch to mode \(q_3\) to walk slowly with a lower body height, this allows the robot to make a narrow turn 
+        or crawl under obstacles. If the robot encounters a tilted obstacle, the system will go through a forced 
+        switch into mode \(q_4\) to walk with a tilted body. Whenever the robot touches a ground obstacle, the system 
+        will stay in mode \(q_5\) permanently with frozen dynamics.
+        The quadruped needs to reason about optimally switching between these different walking modes in order to 
+        reach its goal area (the area marked as the pink cylinder in following videos) as 
+        quickly as possible without colliding with any obstacles.
+
+        BRT for this experiment is calculated on a \([x,y,\varphi]\) grid of \([40,40,72]\) points, over a time horizon 
+        of \(t=45s\). 
+        Having the BRT, we can acquire optimal velocity control, operation mode, and the desired discrete body states
+        at each time. 
+        The quadruped is equipped with an Intel T265 tracking camera, allowing it to estimate its global state via 
+        visual-inertial odometry. 
+        The high-level optimal velocity control and discrete body states provided by our framework are then tracked 
+        by a low-level MPC controller that uses the centroidal dynamics of the quadruped.
+      </p>
+
+      <p align="justify">
+        Our first experiment result is shown in the accompanying video.
+        In our environment setup, the optimal (fastest) route to reach the target is via leveraging the slope on
+        the right.
+        Specifically, the robot remains in the normal walking mode and switches to the slope walking mode once 
+        near the slope.
+        When the robot approaches the end of the slope, it needs to make a tight left turn to avoid a collision 
+        with the wall ahead. 
+        Our framework is able to recognize that and makes a transition to the slow walking mode to allow for a 
+        tighter turn. 
+        Once the turn is complete, the robot goes back in the faster walking mode.
+      </p>
+
+      <br>
+      <center>
+        <video width="640" height="360" controls>
+          <source src="./resources/videos/slope_1_w_traj_comp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+      </center>
+      <br>
+
+      <p align="justify">
+        In our second experiment, we put some papers on the slope, making it more slippery. 
+        This is encoded by adding a higher disturbance in the slope mode \(q_2\). 
+        The new BRT makes the slope path infeasible and hence the robot needs to reach the target via 
+        the (slower) ground route.
+        Once again, apart from selecting a new safe route, the proposed framework is able to switch between 
+        different walking modes along the route to handle tight turns and slanted obstacles, as shown by the 
+        activation of the tilt walking mode. 
+      </p>
+
+      <br>
+      <center>
+        <video width="640" height="360" controls>
+          <source src="./resources/videos/norm_1_w_traj_comp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+      </center>
+      <br>
+
+      <p align="justify">
+        Finally, to test the closed-loop robustness of our method, we add human disturbance in the ground 
+        route experiment. 
+        The robot is kicked and dragged by a human during the locomotion process. 
+        Specifically, the robot was dragged to face backward, forcing it near the tilted obstacle. 
+        However, the reachability controller is able to ensure safety by reactivating the tilt walking 
+        mode, demonstrating that the proposed framework is able to reason 
+        about both closed-loop continuous and discrete control inputs.
+        Nevertheless, it should be emphasized that the presented algorithm does
+        not solve the entirety of legged locomotion planning, but
+        rather only provides the top level of a hierarchical planning architecture that typically include a 
+        robust footstep planner, a wholebody controller, and reliable state estimation.
+      </p>
+
+      <br>
+      <center>
+        <video width="640" height="360" controls>
+          <source src="./resources/videos/norm_d_1_w_traj_comp.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+        </video>
+      </center>
+      <br>
+
+      <br>
+      <hr>
+      <center><h1>Discussion And Future Work</h1></center>
+      <br>
+
+
+      <p align="justify">
+        We present an extension of the classical HJ reachability framework to hybrid dynamical systems with controlled 
+        and forced transitions, and state resets.
+        Along with the BRT, the proposed framework provides optimal continuous and discrete control inputs for the 
+        hybrid system.
+
+        Simulation studies and hardware experiments demonstrate the proposed method, both to reach goal areas and in 
+        maintaining safety.
+        Our work opens up several exciting future research directions. 
+        First, we rely on grid-based numerical methods to compute the BRT, whose computational complexity scales 
+        exponentially with the number of continuous states, limiting a direct use of our framework to relatively 
+        low-dimensional systems. We will explore recent advances in learning-based methods to solve HJI-VI 
+        to overcome this challenge. 
+
+        Another interesting direction would be to extend our framework to the cases involving uncertainty in the 
+        transition surface \(S_i\) or where controlled switches have different transition surfaces.
+
+        Finally, we will apply our framework on a broader range of robotics applications and systems.
+      </p>
+      <br>
+      <br>
 
       <hr>
       <p>
@@ -707,6 +862,8 @@
                 <left>
           <center><h1>Acknowledgements</h1></center>
           
+          <br>
+          This research is supported in part by the DARPA ANSR program and by NSF CAREER program (award number 2240163) and BECAS Chile.
           <br>
           <br>
           This webpage template was borrowed from some <a href="https://richzhang.github.io/colorization/">colorful folks</a>.

@@ -288,6 +288,9 @@
         Conversely, if \(\mathcal{L}\) represents the set of undesirable states for the system (such as obstacles for a navigation robot), we are interested in computing the BRT with the role of control and disturbance switched, i.e., finding the set of initial states from which getting into \(\mathcal{L}\) is unavoidable, despite best control effort.
         </p>
 
+
+
+
         <hr>
         <center><h1>Theorem I</h1></center>
 
@@ -321,6 +324,24 @@
         V(x, q_i, T) = l(x) 
         \end{equation}
         </p>
+
+        <br>
+        <br>
+        <p align='justify'><strong>Numerical implementation</strong>: We now present an approximate numerical algorithm that can be used to calculate the value function in Theorem 1. 
+        It builds upon the value function calculation for the classical HJI-VI , which is solved using currently available level set methods [1]. 
+        Specifically, the value function is computed over a discretized state-space grid and propagated in time using a small timestep \(\delta\).
+        After each propagation step, the value function is updated for all \((x,q)\) using Theorem I, until the time horizon \(T\) is reached. 
+        </p> 
+
+        <table align=center width=480px>
+          <tr>
+              <td width=640px>
+                <center>
+                    <a href="resources\images\algorithm.png"><img src ="resources\images\algorithm.png"></img></href></a><br> 
+              </center>
+              </td>
+            </tr>
+        </table>
 
         <br>
  
@@ -539,7 +560,7 @@
         </p>
         <p align="justify">
           We now apply the proposed method to compute the BRT.
-          To implement Algorithm 1, we use a modified version of helperOC library and the level set toolbox[2], both of which are used to solve classical HJI-VI.
+          To implement Algorithm 1, we use a modified version of helperOC library and the level set toolbox[1], both of which are used to solve classical HJI-VI.
           We use a grid of 301 points over the \(x\) dimension for each of the 3 discrete operation modes. The resulting BRTs are the following: 
         </p>
 
@@ -579,8 +600,60 @@
         algorithm can optimally leverage discrete transitions along with continuous control to reach the target 
         set from a wider set of initial states. 
         </p>
-        
-      
+
+        <center><h2>One-Legged Jumper</h2></center>   
+        <p align="justify">
+          As a more challenging case study, we now consider a planar one-legged jumping robot that wants to reach a goal area on top of a raised platform.
+          The center of mass dynamics of the jumper robot are shown in the following diagram.
+          The robot has two main operation modes: a stance mode and a flight mode. 
+          The stance mode is active when the leg is in contact with the ground, which allows the leg to exert force and accelerate in xy directions.
+          The flight mode is activated when the leg is no longer in contact with the ground, which is modeled as an unactuated ballistic flight. 
+          Additionally, we consider a freeze mode that will permanently halt the dynamics if the center of mass of the robot collides with the terrain; this modeling allows us to obtain the characteristic of a reach-avoid scenario while only doing reach calculations, since any trajectory that goes through the terrain will be frozen and excluded of the reach BRT as it will never reach the target set.
+        </p>
+
+
+        <table align=center width=480px>
+          <tr>
+            <td width=640px>
+              <center>
+                  <a href="./resources/images/dog_jump_diag.png"><img src ="./resources/images/dog_jump_diag.png"></img></href></a><br> 
+              </center>
+            </td>
+          </tr> 
+          <tr>
+            <td width=640px>
+              <center>
+                <p align='justify'>
+                  Hybrid formulation for the planar jumping robot.
+                </p>
+              </center>
+            </td>
+          </tr>             
+        </table>
+
+        <p align="justify">
+        In this system, the continuous state is given by \([x,y,V_x,V_y]^T\), representing both positions and velocities in the \(xy\) plane. Here \(u_1\) and \(u_2\) are the force inputs in the \(x\) and \(y\) directions, both with an actuation range of \(0-30 N\).
+        \(l_0=0.5m\) is the length of the robot leg,  \(m=1kg\) is the mass of the robot, and \(g\) is the acceleration due to gravity. 
+        The target set is a circular area in the \(xy\) plane on top of a raised platform, which is considered to be part of the terrain along with the ground; the objective here is to find all the initial states of the robot in the stance mode from which a successful jump into the target set is guaranteed without colliding with the platform.
+        </p>
+
+        <p align="justify">
+        In the following clip we show results for this example. There the blue BRT shows all the resting stance states that guarantee reaching the target without colliding into the obstacle.
+        We present a trajectory and slow down at the mode transition to see how it moves between different slices of the BRT.
+        One interesting highlight of this example is how the robot builds momentum to optimally use the forced transition.
+        These behaviors are not hard-coded in the system, they automatically emerge out of the reachability analysis.
+        </p>
+
+        <br>
+        <center>
+          <video width="640" height="360" controls>
+            <source src="./resources/videos/hybrid_jumper.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+          </video>
+        </center>
+        <br>
+
+      <!--
       <center><h2>Two-Aircraft Conflict Resolution</h2></center>        
       <p align='justify'>
         We next consider the two-aircraft conflict resolution example.
@@ -671,7 +744,7 @@
 
       <p align='justify'>
         The left BRT exactly replicates the results of the case presented in [3] where both
-        aircraft keep their speed constant at their maximum value \(u=3\) and \(d=4), where the inside of the BRT 
+        aircraft keep their speed constant at their maximum value \(u=3\) and \(d=4\), where the inside of the BRT 
         correspond to states where the adversarial airplane can place itself behind the controlled aircraft and 
         use its higher velocity to force a collision. 
         However, unlike [3], we do not use any hard-coded heuristics to account for the 
@@ -685,7 +758,7 @@
       </p>
 
       <br>
-      <hr>
+      <hr>-->
       <center><h1>Hardware Experiments</h1></center>
       <br>
 
@@ -842,18 +915,10 @@
       <br>
 
       <hr>
+      
       <p>
-        [1] J. Lygeros, “On reachability and minimum cost optimal control,” Automatica, vol. 40, no. 6, pp. 917–927, 2004.
+        [1] I. Mitchell, “A toolbox of level set methods,” http://www.cs.ubc.ca/mitchell/ToolboxLS/toolboxLS. pdf, Tech. Rep. TR-2004-09, 2004.
       </p>
-      <br>
-      <p>
-        [2] I. Mitchell, “A toolbox of level set methods,” http://www.cs.ubc.ca/mitchell/ToolboxLS/toolboxLS. pdf, Tech. Rep. TR-2004-09, 2004.
-      </p>
-      <br>
-      <p>
-        [3] I. Mitchell and C. J. Tomlin, “Level set methods for computation in hybrid systems,” in International workshop on hybrid systems: Computation and control. Springer, 2000, pp. 310–323.
-      </p>
-      <hr>
       <br>
 
       <table align=center width=1100px>
